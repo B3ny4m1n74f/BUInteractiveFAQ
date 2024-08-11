@@ -7,12 +7,14 @@ This project is designed to help BU MET students ask and get answers to their qu
 |-------------------------|
 
 ### ✍️ Author
-| Role                                 | Name                   |
-|--------------------------------------|------------------------|
-| Project Manager, Project Structure Design | Benyamin Tafreshian     |
-| Data Crawling, Front-end and Back-end | Shuaijun Liu           |
-| Requirements, Support Files and Test | Kun Hu                 |
-| UX/UI Design                         | Anna Hu                |
+| Role                                      | Name                   |
+|-------------------------------------------|------------------------|
+| Project Manager, Project Structure Design | Benyamin Tafreshian    |
+| Data Crawling, Front-end and Back-end     | Shuaijun Liu           |
+| Requirements, Support Files and Test      | Kun Hu                 |
+| UX/UI Design                              | Anna Hu                |
+| Requirements Analyst                      | Mukesh Varma Mudundi   |
+| Test Engineer                             | Qi Wu                  |
 
 ## 🎨 Project Structure
 
