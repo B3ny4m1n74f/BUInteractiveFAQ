@@ -1,0 +1,248 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+header {
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-container .logo img {
+  height: 35px;
+}
+
+.header-container nav a {
+  color: black;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.header-container nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-light-gray {
+  background-color: var(--section-bg-color, #f0f0f0);
+  height: 50vh;
+  padding: var(--section-padding, 20px 20px);
+  margin-top: 0;
+  position: relative;
+}
+
+.section-white {
+  background-color: var(--section-bg-color, #ffffff);
+  height: 30vh;
+  padding: var(--section-padding, 20px 20px);
+  padding-top: 60px;
+}
+
+.section-dark-gray {
+  background-color: var(--section-bg-color, #272932);
+  height: 4vh;
+  color: var(--section-text-color, white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--section-font-size, 0.8em);
+}
+
+.first-section-text {
+  color: var(--text-color, #000);
+  font-size: var(--text-font-size, 2.5rem);
+  margin-bottom: var(--text-margin-bottom, 10px);
+  font-family: var(--text-font-family, 'Playfair Display', serif);
+  text-align: var(--text-align, center);
+  max-width: var(--text-max-width, 100%);
+  min-width: var(--text-min-width, 300px);
+}
+
+.second-section-text {
+  color: var(--text-color, #555);
+  font-size: var(--text-font-size, 1.1rem);
+  line-height: 1.5;
+  margin-bottom: var(--text-margin-bottom, 20px);
+  font-family: var(--text-font-family, Arial, sans-serif);
+  text-align: var(--text-align, justify);
+  max-width: 500px;
+  word-break: break-word;
+}
+
+.limited-width {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.third-section-text {
+  color: var(--text-color, #3e5c7c);
+  font-size: 1.5rem;
+  margin-bottom: var(--text-margin-bottom, 20px);
+  font-family: var(--text-font-family, 'Times New Roman', Times, serif);
+  text-align: var(--text-align, center);
+}
+
+.program-select-button, #start-button, .role-button {
+  margin-top: var(--button-margin-top, 20px);
+  padding: var(--button-padding, 10px 20px);
+  font-size: var(--button-font-size, 1rem);
+  cursor: pointer;
+  background-color: var(--button-bg-color, #000);
+  color: var(--button-text-color, #fff);
+  border: none;
+  border-radius: var(--button-border-radius, 5px);
+  box-shadow: var(--button-box-shadow, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  position: relative;
+}
+
+.register-button {
+  margin-top: var(--button-margin-top, 20px);
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: #d3d3d3;
+  color: #555;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.welcome-message {
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.program-options {
+  display: flex;
+  border-radius: 5px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  border: var(--dropdown-border, 1px solid #0c0b0b);
+  padding: var(--dropdown-padding, 10px);
+  background-color: var(--dropdown-bg-color, #b8b6b6);
+  width: var(--dropdown-width, 180px);
+  position: absolute;
+  z-index: 1000;
+  box-shadow: var(--dropdown-box-shadow, 0px 4px 6px rgba(0, 0, 0, 0.1));
+  overflow-y: auto;
+  top: calc(75% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.program-options div {
+  margin: var(--dropdown-option-margin, 5px 0);
+  cursor: pointer;
+  padding: var(--dropdown-option-padding, 5px);
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.program-options div:hover {
+  background-color: var(--dropdown-hover-bg-color, #f0f0f0);
+}
+
+.hidden {
+  display: none;
+}
+
+.modal {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 300px;
+  z-index: 3000;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content .role-button,
+.modal-content .register-button {
+  display: block;
+  margin: 10px auto;
+}
+
+.modal-content .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.modal-content .form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.modal-content .form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal.active {
+  display: flex;
+}
+
+body.modal-open #content,
+body.modal-open header,
+body.modal-open footer {
+  filter: blur(5px);
+}

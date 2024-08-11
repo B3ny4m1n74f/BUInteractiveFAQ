@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Interface</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="js/common.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/bu-logo.gif" alt="Boston University Logo">
+            </div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="chat.html">NLP Chat</a>
+                <a href="gpt-chat.html">GPT Chat</a>
+                <a href="admin.html">BU Admin</a>
+                <a href="faq-management.html">FAQ Management</a>
+                <a href="upload.html">Upload</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <h1>Welcome to BU FAQ-Chatbot! (GPT-4o Based)</h1>
+        <div class="chat-container" id="chatbox">
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-question" placeholder="Send a message">
+            <button class="send-btn" id="submit-question"><img src="images/send-icon.png" alt="Send"></button>
+        </div>
+    </main>
+    <footer class="section-dark-gray">
+        <p>© 2024 Trustees of Boston University</p>
+    </footer>
+
+    <script src="js/gpt-chat.js"></script>
+</body>
+</html>
