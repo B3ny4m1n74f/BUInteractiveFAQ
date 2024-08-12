@@ -215,7 +215,7 @@ You will see the home page of the FAQ Project. From here, you can navigate to di
 
 ## 📜 License
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for more details.
+This project is licensed under the **GNU V3.0 License**. See the `LICENSE` file for more details.
 
 ## 🙏 Acknowledgements
 
