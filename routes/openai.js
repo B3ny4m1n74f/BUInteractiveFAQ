@@ -4,8 +4,8 @@ const path = require('path');
 
 const router = express.Router();
 
-const OPENAI_API_KEY = 'input api';
-const INIT_JSON_FILE_PATH = path.join(__dirname, '../data/init_data.json');
+const OPENAI_API_KEY = 'api';
+const INIT_JSON_FILE_PATH = path.join(__dirname, '../data/BU_MET_FAQs.json');
 const INITIAL_MESSAGE = `
 You are a knowledgeable assistant for Boston University's Metropolitan College. You have access to a list of FAQs stored in a JSON file. Follow these steps when responding to user queries:
 1. *Search the JSON Data First:* Always begin by searching the FAQ data in the JSON file to find the most relevant match to the user's query. If a close match is found, provide the corresponding answer exactly as it appears in the JSON.

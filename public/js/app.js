@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ question: userQuestion })
             });
-
+            
             const data = await response.json();
             if (response.ok) {
                 console.log('Received answer:', data.answer); // Debug log
@@ -69,12 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="text">
                         <strong>Answer:</strong> ${data.answer}
-                        ${data.urls && data.urls.length > 0 ? `
-                            <div>
-                                <p>For more detailed information, you can visit the following websites:</p>
-                                ${data.urls.map(urlObj => `<a href="${urlObj.url}" target="_blank">${urlObj.text}</a><br>`).join('')}
-                            </div>
-                        ` : ''}
                     </div>
                 `;
                 messagesDiv.appendChild(answerMessage);

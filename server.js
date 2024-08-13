@@ -15,12 +15,18 @@ mongoose.connect(process.env.MONGO_URI);
 
 const authRoutes = require('./routes/auth');
 const questionRoutes = require('./routes/questions');
-const gptChatRoutes = require('./routes/openai');
 
 app.use('/auth', authRoutes);
 app.use('/questions', questionRoutes);
-app.use('/openai', gptChatRoutes);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Import and use openai routes with error handling
+try {
+    const gptChatRoutes = require('./routes/openai');
+    app.use('/openai', gptChatRoutes);
+} catch (error) {
+    console.error('Error loading OpenAI routes:', error);
+}
 
 // Page route handling
 app.get('/', (req, res) => {
