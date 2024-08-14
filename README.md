@@ -7,14 +7,12 @@ This project is designed to help BU MET students ask and get answers to their qu
 |-------------------------|
 
 ### ✍️ Author
-| Role                                      | Name                   |
-|-------------------------------------------|------------------------|
-| Project Manager, Project Structure Design | Benyamin Tafreshian    |
-| Data Crawling, Front-end and Back-end     | Shuaijun Liu           |
-| Requirements, Support Files and Test      | Kun Hu                 |
-| UX/UI Design                              | Anna Hu                |
-| Requirements Analyst                      | Mukesh Varma Mudundi   |
-| Test Engineer                             | Qi Wu                  |
+| Role                                 | Name                   |
+|--------------------------------------|------------------------|
+| Project Manager, Project Structure Design | Benyamin Tafreshian     |
+| Data Crawling, Front-end and Back-end | Shuaijun Liu           |
+| Requirements, Support Files and Test | Kun Hu                 |
+| UX/UI Design                         | Anna Hu                |
 
 ## 🎨 Project Structure
 
@@ -25,7 +23,7 @@ BU-FAQ-Chatbot/
 │   └── authController.js
 │
 ├── data/
-│   ├── BU_MET_FAQs_big.json
+│   ├── BU_MET_FAQs.csv
 │   └── BU_MET_FAQs.json
 │
 ├── models/
@@ -215,7 +213,7 @@ You will see the home page of the FAQ Project. From here, you can navigate to di
 
 ## 📜 License
 
-This project is licensed under the **GNU V3.0 License**. See the `LICENSE` file for more details.
+This project is licensed under the **GNU V3 License**. See the `LICENSE` file for more details.
 
 ## 🙏 Acknowledgements
 
