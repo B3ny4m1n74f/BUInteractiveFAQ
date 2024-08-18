@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch'); // Use static import for consistency
 
 const router = express.Router();
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Use environment variable
@@ -19,6 +18,7 @@ You are a knowledgeable assistant for Boston University's Metropolitan College. 
 let initialResponse; // Store the initialization response
 
 const makeOpenAIRequest = async (messages) => {
+    const fetch = (await import('node-fetch')).default; // Dynamic import of node-fetch
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
