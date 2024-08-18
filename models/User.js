@@ -6,52 +6,56 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
+        minlength: 3,
+        maxlength: 30
     },
     first_name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 2,
+        maxlength: 50
     },
     last_name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 2,
+        maxlength: 50
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        trim: true,
+        match: [/.+\@.+\..+/, 'Please fill a valid email address']
+    },
+    nickname: String,
+    website: {
+        type: String,
         trim: true
     },
-    nickname: {
-        type: String
-    },
-    website: {
-        type: String
-    },
     telephone: {
-        type: String
+        type: String,
+        trim: true
     },
     mobile: {
-        type: String
+        type: String,
+        trim: true
     },
-    bio: {
-        type: String
-    },
+    bio: String,
     profile_image: {
-        type: String
+        type: String,
+        trim: true
     },
     password: {
         type: String,
-        required: true
-    },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
-    updated_at: {
-        type: Date,
-        default: Date.now
+        required: true,
+        minlength: 8
     }
+}, {
+    timestamps: true
 });
 
 // Encrypt password before saving user data
@@ -59,6 +63,9 @@ UserSchema.pre('save', function(next) {
     const user = this;
     if (!user.isModified('password')) {
         return next();
+    }
+    if (user.password.length < 8) {
+        return next(new Error('Password must be at least 8 characters long.'));
     }
     bcrypt.genSalt(10, (err, salt) => {
         if (err) return next(err);
