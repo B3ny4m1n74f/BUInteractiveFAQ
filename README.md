@@ -1,4 +1,4 @@
-# BU-FAQ-Chatbot Project (CS673 Team 2)
+# BUInteractiveFAQ (CS673 Team 2)
 
 This project is designed to help BU MET students ask and get answers to their questions efficiently. The system supports both **NLP-based** and **GPT-based** question answering. Users can register, log in, and start asking questions right away.
 
