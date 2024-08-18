@@ -1,10 +1,10 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const fetch = require('node-fetch'); // Use static import for consistency
 
 const router = express.Router();
-
-const OPENAI_API_KEY = 'api';
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Use environment variable
 const INIT_JSON_FILE_PATH = path.join(__dirname, '../data/BU_MET_FAQs.json');
 const INITIAL_MESSAGE = `
 You are a knowledgeable assistant for Boston University's Metropolitan College. You have access to a list of FAQs stored in a JSON file. Follow these steps when responding to user queries:
@@ -18,27 +18,33 @@ You are a knowledgeable assistant for Boston University's Metropolitan College. 
 
 let initialResponse; // Store the initialization response
 
+const makeOpenAIRequest = async (messages) => {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+            model: "gpt-4o", // Correct model version
+            messages
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch GPT response.');
+    }
+
+    return response.json();
+};
+
 async function sendInitializationData() {
     try {
-        const fetch = (await import('node-fetch')).default; // Dynamic import of node-fetch
         const initData = fs.readFileSync(INIT_JSON_FILE_PATH, 'utf-8');
-
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${OPENAI_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "gpt-4o",
-                messages: [
-                    { role: "system", content: INITIAL_MESSAGE },
-                    { role: "user", content: initData }
-                ]
-            })
-        });
-
-        const data = await response.json();
+        const data = await makeOpenAIRequest([
+            { role: "system", content: INITIAL_MESSAGE },
+            { role: "user", content: initData }
+        ]);
         initialResponse = data.choices[0].message.content; // Save the initialization response
         console.log('GPT-4o Initialization complete.');
     } catch (error) {
@@ -58,30 +64,12 @@ router.post('/ask', async (req, res) => {
     const userQuestion = req.body.question;
 
     try {
-        const fetch = (await import('node-fetch')).default; // Dynamic import of node-fetch
-        const response = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${OPENAI_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: "gpt-4o",
-                messages: [
-                    { role: "system", content: "You are a helpful assistant." },
-                    { role: "assistant", content: initialResponse },
-                    { role: "user", content: userQuestion }
-                ]
-            })
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            res.json({ answer: data.choices[0].message.content });
-        } else {
-            res.status(500).json({ error: 'Failed to fetch GPT response. Please try again later.' });
-        }
+        const data = await makeOpenAIRequest([
+            { role: "system", content: "You are a helpful assistant." },
+            { role: "assistant", content: initialResponse },
+            { role: "user", content: userQuestion }
+        ]);
+        res.json({ answer: data.choices[0].message.content });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'An error occurred while processing your request.' });
