@@ -17,7 +17,7 @@ This project is designed to help BU MET students ask and get answers to their qu
 ## 🎨 Project Structure
 
 ```
-BU-FAQ-Chatbot/
+BUInteractiveFAQ/
 │
 ├── controllers/
 │   └── authController.js
