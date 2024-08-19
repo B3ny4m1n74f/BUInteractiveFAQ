@@ -68,16 +68,15 @@ BUInteractiveFAQ/
 │   └── openai.js
 │
 ├── uploads/
-│   └── 1723309227575.png
+│   
 │
 ├── .env
 ├── .gitignore
-├── scheduler.js
 ├── server.js
 ├── package-lock.json
 ├── package.json
 ├── README.md
-└── crawler.py
+├── LICENSE
 ```
 
 ### 📝 File Descriptions
