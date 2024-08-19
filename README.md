@@ -175,10 +175,24 @@ Ensure you have the following installed:
 1. **Ensure MongoDB is running on your system.** The default configuration assumes MongoDB is running on `mongodb://localhost:27017/qawebapp`. You can adjust this in the `.env` file.
 
 2. **Create a `.env` file in the project root and add the following configurations:**
+
     ```plaintext
+    # Server Configuration
+    PORT=
+
+    # Database Configuration
     MONGO_URI=mongodb://localhost:27017/qawebapp
+
+    # Security Configuration
     JWT_SECRET=693519
+
+    # Node Environment Configuration
+    NODE_ENV=
+
+    # OpenAI Configuration
+    OPENAI_API_KEY=
     ```
+
 
 ### Running the Project
 
