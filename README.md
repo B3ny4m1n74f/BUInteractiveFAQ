@@ -1,6 +1,6 @@
 # BUInteractiveFAQ (CS673 Team 2)
 
-This project is designed to assist current and prospective Boston University Metropolitan College students by answering their questions on a variety of topics, such as programs, admissions, and more. The system leverages novel LLM models and NLP concepts to provide accurate responses in a timely and user-friendly manner.
+This project is designed to assist current and prospective Boston University Metropolitan College students by answering their questions on a variety of topics, such as programs, admissions, and university resources. The system leverages novel LLM models and NLP concepts to provide accurate responses in a timely and user-friendly manner.
 
 ### 👍 Advisor
 | **Prof. Alex Elentukh** |
