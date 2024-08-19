@@ -1,6 +1,6 @@
 # BUInteractiveFAQ (CS673 Team 2)
 
-This project is designed to help BU MET students ask and get answers to their questions efficiently. The system supports both **NLP-based** and **GPT-based** question answering. Users can register, log in, and start asking questions right away.
+This project is designed to assist current and prospective Boston University Metropolitan College students by answering their questions on a variety of topics, such as programs, admissions, and more. The system leverages novel LLM models and NLP concepts to provide accurate responses in a timely and user-friendly manner.
 
 ### 👍 Advisor
 | **Prof. Alex Elentukh** |
