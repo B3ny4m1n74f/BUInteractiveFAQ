@@ -1,40 +1,47 @@
 const express = require('express');
 const path = require('path');
+const compression = require('compression');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
 const router = express.Router();
 
-// Serve the index.html file for the root URL
-router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/index.html'));
+// Use compression middleware to gzip all responses
+router.use(compression());
+
+// Use helmet to set secure HTTP headers
+router.use(helmet());
+
+// Rate limiter middleware to limit repeated requests to the public endpoints
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "Too many requests, please try again later.",
 });
 
-// Serve the chat.html file
-router.get('/chat', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/chat.html'));
-});
+// Apply rate limiter to all requests
+router.use(limiter);
 
-// Serve the gpt-chat.html file
-router.get('/gpt-chat', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/gpt-chat.html'));
-});
+// Helper function to serve static HTML files
+function serveStaticFile(route, file) {
+    router.get(route, (req, res, next) => {
+        const filePath = path.join(__dirname, '../public', file);
+        res.sendFile(filePath, (err) => {
+            if (err) {
+                console.error(`Error serving ${file}:`, err);
+                res.status(500).send('Internal Server Error');
+            }
+        });
+    });
+}
 
-// Serve the admin.html file
-router.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/admin.html'));
-});
-
-// Serve the faq-management.html file (corrected to include the extension)
-router.get('/faq-management', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/faq-management.html'));
-});
-
-// Serve the upload.html file
-router.get('/upload', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/upload.html'));
-});
-
-// Serve the register.html file
-router.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/register.html'));
-});
+// Define routes using the helper function
+serveStaticFile('/', 'index.html');
+serveStaticFile('/chat', 'chat.html');
+serveStaticFile('/gpt-chat', 'gpt-chat.html');
+serveStaticFile('/admin', 'admin.html');
+serveStaticFile('/faq-management', 'faq-management.html');
+serveStaticFile('/upload', 'upload.html');
+serveStaticFile('/register', 'register.html');
 
 module.exports = router;
