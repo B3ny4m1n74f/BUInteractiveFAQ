@@ -1,15 +1,17 @@
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("DOMContentLoaded event fired");
 
-    // 获取用户信息并填充到页面中
-    try {
-        const token = localStorage.getItem('token'); // 假设 JWT 存储在 localStorage 中
-        if (!token) {
-            console.error('No token found. Cannot proceed without authentication.');
-            alert('Error: No token found. Please log in to access this page.');
-            return;
-        }
+    // Retrieve the user token from localStorage
+    let token = localStorage.getItem('token'); // Get the token from localStorage
 
+    if (!token) {
+        console.error('No token found. Cannot proceed without authentication.');
+        alert('Error: No token found. You will be redirected to the login page.');
+        window.location.href = '/login'; // Redirect to the login page if no token is found
+        return;
+    }
+
+    try {
         const response = await fetch('/auth/profile', {
             method: 'GET',
             headers: {
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (response.ok) {
             const user = await response.json();
-            // 填充表单字段
+            // Populate form fields with user data
             document.getElementById('username').value = user.username;
             document.getElementById('firstname').value = user.first_name;
             document.getElementById('lastname').value = user.last_name;
@@ -31,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('mobile').value = user.mobile || '';
             document.getElementById('bioinfo').value = user.bio || '';
 
-            // 如果有 profile_image，则设置 img.src = `/uploads/${user.profile_image}`;
+            // If a profile image exists, set the img.src to display it
             if (user.profile_image) {
                 const profileImageElement = document.querySelector('.profile-image');
                 profileImageElement.src = `/uploads/${user.profile_image}`;
@@ -45,12 +47,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('An error occurred while loading the profile.');
     }
 
-    // 处理保存更新的用户信息
+    // Handle saving updated user information
     const saveProfileForm = document.querySelector('.info-form');
 
     if (saveProfileForm) {
         saveProfileForm.addEventListener('submit', async (event) => {
             event.preventDefault();
+
             const username = document.getElementById('username').value;
             const firstname = document.getElementById('firstname').value;
             const lastname = document.getElementById('lastname').value;
@@ -80,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const response = await fetch('/auth/update-profile', {
                     method: 'POST',
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`, // Use the token retrieved earlier
                     },
                     body: formData
                 });
