@@ -24,7 +24,7 @@ router.use(limiter);
 
 // Helper function to serve static HTML files
 function serveStaticFile(route, file) {
-    router.get(route, (req, res, next) => {
+    router.get(route, (req, res) => {  // `next` removed here
         const filePath = path.join(__dirname, '../public', file);
         res.sendFile(filePath, (err) => {
             if (err) {
