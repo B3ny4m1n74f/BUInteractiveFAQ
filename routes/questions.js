@@ -126,18 +126,21 @@ router.post('/upload', upload.single('file'), (req, res) => {
     const jsonTargetPath = path.join(__dirname, '../data/BU_MET_FAQs.json');
     const csvTargetPath = path.join(__dirname, '../data/BU_MET_FAQs.csv');
 
-    const handleFileMove = (sourcePath, targetPath, successMessage) => {
+    const handleFileMove = (sourcePath, targetPath, callback) => {
         fs.rename(sourcePath, targetPath, (err) => {
             if (err) return handleFileError(err, res, 'Failed to upload the file');
-            res.send({ success: true, message: successMessage });
+            callback(); // Invoke the callback to continue the flow
         });
     };
 
     if (ext === '.json') {
-        handleFileMove(tempPath, jsonTargetPath, 'JSON file uploaded and replaced successfully.');
+        handleFileMove(tempPath, jsonTargetPath, () => {
+            res.send({ success: true, message: 'JSON file uploaded and replaced successfully.' });
+        });
     } else if (ext === '.csv') {
-        handleFileMove(tempPath, csvTargetPath, 'CSV file uploaded successfully.');
-        runScript(csvToJsonScriptPath, res, 'CSV converted to JSON and replaced successfully.', 'Failed to convert CSV to JSON');
+        handleFileMove(tempPath, csvTargetPath, () => {
+            runScript(csvToJsonScriptPath, res, 'CSV converted to JSON and replaced successfully.', 'Failed to convert CSV to JSON');
+        });
     } else {
         fs.unlink(tempPath, err => {
             if (err) console.error('Error deleting file:', err);
