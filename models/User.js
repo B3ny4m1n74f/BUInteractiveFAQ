@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         trim: true,
-        match: [/.+\@.+\..+/, 'Please fill a valid email address']
+        match: [/.+@.+\..+/, 'Please fill a valid email address']
     },
     nickname: String,
     website: {
